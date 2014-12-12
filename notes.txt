@@ -1,0 +1,8 @@
+if(alpha is higher than beta) 
+
+or(beta is lower than alpha)
+
+prun 
+
+--
+each node has beta and alpha
