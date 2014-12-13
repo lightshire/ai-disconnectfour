@@ -142,6 +142,12 @@ public class State
 		return someoneWon;
 	}
 
+	public boolean hasFailingPosition() {
+		boolean failed = false;
+
+		return failed;
+	}
+
 	public int computeWeight() {
 		int _weight = -1;
 		int max 	= this.board.getMatrixLength();
