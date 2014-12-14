@@ -48,6 +48,10 @@ public class State
 
 	public boolean pushMove(int column, boolean isOpponent) {
 
+		if(this.isGameEnding()) {
+			return false;
+		}
+
 		for(int y= this.board.getMatrixLength() - 1; y >= 0; y--) {
 			if(!this.board.hasPlacement(column, y)) {
 				this.board.addPosition(new Position(column, y, isOpponent));
@@ -112,8 +116,7 @@ public class State
 	}
 
 	public boolean isGameEnding() {
-		boolean isFull = this.isFull();
-
+		boolean isFull = this.isFull() || this.someoneWon();
 		return isFull;
 	}
 
@@ -137,7 +140,39 @@ public class State
 	}
 
 	public boolean someoneWon() {
-		boolean someoneWon = false;
+		boolean someoneWon 	= false;
+		int matrixLength 	= this.board.getMatrixLength();
+		Position[][] positions 	= this.board.getPositions();
+		Position winningPosition = null;
+
+		for(int y = 0; y < matrixLength; y++) {
+
+			for(int x = 0; x < matrixLength; x++) {
+
+				Position _pos = positions[x][y];
+
+				if(_pos == null) {
+					continue;
+				}
+
+				if(Moves.rightWinningMove(x, y, _pos, positions) != null) {
+					return true;
+				}
+
+				if(Moves.bottomRightWinningMove(x, y, _pos, positions) != null) {
+					return true;
+				}
+
+				if(Moves.bottomWinningMove(x, y, _pos, positions) != null) {
+					return true;
+				}
+
+				if(Moves.bottomLeftWinningMove(x, y, _pos, positions) != null) {
+					return true;
+				}
+
+			}
+		}
 
 		return someoneWon;
 	}

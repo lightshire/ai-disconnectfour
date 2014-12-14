@@ -26,9 +26,20 @@ public class Game
 		return this.current.pushMove(row, true);
 	}
 
-	public void aiMove() {
+	public State aiMove() {
+
+		if(current.isGameEnding()) {
+			return current;
+		}
+
 		State state = Intelligence.move(current, Intelligence.DEPTH);
 		this.pushOpponentMove(state.getMainMove());
+
+		return state;
+	}
+
+	public State getCurrentState() {
+		return this.current;
 	}
 
 	public String toString() {

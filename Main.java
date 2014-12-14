@@ -38,6 +38,9 @@ public class Main
 			System.out.println(game);
 			System.out.println("AI Computing move..");
 			bootAI();
+		}else if(game.getCurrentState().isGameEnding()) {
+			System.out.println("Game has ended.. called in player");
+			return;
 		}else {
 			System.out.println("Move is invalid please try again.");
 			enterPlayer();
@@ -57,8 +60,13 @@ public class Main
 	}
 
 	public static void bootAI() {
-		game.aiMove();
+		State state = game.aiMove();
 		System.out.println(game);
+
+		if(state.isGameEnding()) {
+			System.out.println("Game has ended.. called in AI");
+			System.exit(0);
+		}
 
 		enterPlayer();
 

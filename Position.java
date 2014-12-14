@@ -46,4 +46,12 @@ public class Position
 		return this.isPlaced;
 	}
 
+	public boolean isTheSame(Position pos) {
+		return pos.isOpponent == this.isOpponent;
+	}
+
+	public String toString() {
+		return "("+this.x+", "+this.y+") opponent: "+this.isOpponent;
+	}
+
 }
